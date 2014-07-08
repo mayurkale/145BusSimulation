@@ -1,0 +1,40 @@
+12-03-13
+
+1. Commented Line for wait time logic in ipdc.c
+
+13-07-13
+
+1. Added a new table LOG_TIME_INFO
+2. Logging the times at different points in the LOG_TIME_INFO table completed 
+
+15-07-13
+
+1.Commented the printf in the iPDC parser.c
+
+16-07-13
+
+A bug in ipdc.c interchange of TCP and UDP ports
+
+2013-07-17 23:07:47 
+
+A bug resolved from in align_sort.c in function timealign()
+
+2013-11-16 09:09:03 
+
+1. In parser.c match index == 4 intead of 5 in writeTimeToLog()
+2. In align.c commented free dataframe
+
+20-11-2013
+
+hcreate_r() used for apps read
+hcreate_r() used to skip sorting
+
+21-11-2013
+
+4 hash tables created
+1. To store the apps info (hashForApp)
+2. To store apps details (hashForAppDetails)
+3. To store pmu id to phasor name and start index mapping (hashForMapPMUToPhasor)
+4. to store pmu/iPDC frame size to avoid sorting (hashForPMUInfo)
+
+one list to store hash keys of app details has table (AngleDiffHashKeyList)

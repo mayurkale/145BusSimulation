@@ -1,0 +1,5 @@
+Fault initiation time (s), Tfault= 0.09
+Fault Duration,(s) Tclear= 0.04
+Faulted Bus: 6
+Line(s) to be tripped, [ , ]= 
+Warning: PACK can only be used from the MATLAB command line. 

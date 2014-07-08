@@ -1,0 +1,17 @@
+Total+AF8-Buses,listed+AF8-buses,,,,,,,
+145,7,,,,,,,
+pmuids,93,110,139,140,135,136,141,
+Power+AF8-values,6.65,30.432,2210.2,899.19,232.63,2018.17,1474.22,
+Total Applications,2,,,,,,,
+AppID (1+AC0-averageFrequency: 2+AC0-frequencyInstability:3+AC0-angleInstability:4+AC0-voltagePhasorAggregation:5+AC0-outOfStepDetection:6 angle Difference),Super PDC ID,NUMBER OF LPDCs,LPDC IDs,Num of Applications,LPDC ID PAIR ,PMU ID PAIR,PARAMETERS,THRESHOLD
+1,4000,2,3000::3001,5,,,,10
+,,,,,3000::3001,12::6,V1::V1,
+,,,,,3000::3001,66::8,V1::V1,
+,,,,,3000::3001,69::11,V1::V1,
+,,,,,3000::3001,58::57,V1::V1,
+,,,,,3000::3001,61::45,V1::V1,
+AppID (1+AC0-averageFrequency: 2+AC0-frequencyInstability:3+AC0-angleInstability:4+AC0-voltagePhasorAggregation:5+AC0-outOfStepDetection:6 angle Difference),No of LPDCs,,,,,,,
+2,2,,,,,,,
+LPDC ID,No. of PMUs,,,,,,,
+3000,3,135,136,141,,,,
+3001,4,93,110,139,140,,,

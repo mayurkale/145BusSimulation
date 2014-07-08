@@ -1,0 +1,51 @@
+137:			spdc_app1->app_id = api_id;
+138:			spdc_app1->data_priority = priority;
+141:			spdc_app1->num_modes = atoi(d1);
+144:			spdc_app1->num_lpdcs = atoi(d1);
+145:			printf("Hereswad == %d\n",spdc_app1->num_lpdcs);
+146:			spdc_app1->current_lpdcs = 0;
+148:			spdc_app1->modes = (struct SPDCmode_info **)malloc(spdc_app1->num_modes * sizeof(struct SPDCmode_info *));
+154:			for(j=0; j<spdc_app1->num_modes; j++){
+155:				spdc_app1->modes[j] = (struct SPDCmode_info *)malloc(sizeof(struct SPDCmode_info));
+156:				spdc_app1->modes[j]->sum_theta_c = 0.0;
+159:/*				spdc_app1->modes[j]->threshold = atof(d1);*/
+160:/*				printf("Threshold= %f\n",spdc_app1->modes[j]->threshold);*/
+166:			spdc_app1->cap_theta = (struct Captured_theta_c_i **)malloc( spdc_app1->num_lpdcs * sizeof(struct Captured_theta_c_i *));
+171:			for(j=0; j<spdc_app1->num_lpdcs; j++){
+173:				spdc_app1->cap_theta[j] = (struct Captured_theta_c_i *)malloc(sizeof(struct Captured_theta_c_i));
+176:				spdc_app1->cap_theta[j]->lpdc_id = atoi(d1);
+179:				spdc_app1->cap_theta[j]->mw = (struct modewise **)malloc(spdc_app1->num_modes * sizeof(struct modewise*));
+197:				for(k=0; k<spdc_app1->num_modes; k++){
+198:					spdc_app1->cap_theta[j]->mw[k] = (struct modewise *)malloc(sizeof(struct modewise));
+199:					spdc_app1->cap_theta[j]->mw[k]->theta_c_i = 0.0;
+204:					spdc_app1->cap_theta[j]->mw[k]->power_value = atof(d2);
+205:					spdc_app1->cap_theta[j]->mw[k]->threshold = atof(d3);
+207:					spdc_app1->modes[k]->power_sum += spdc_app1->cap_theta[j]->mw[k]->power_value;
+211:			printf("Hereswad2 == %d\n",spdc_app1->num_lpdcs);
+212:/*			printf("spdc_app1->modes[0]->sum_theta_c = %f\n",spdc_app1->modes[0]->sum_theta_c);*/
+213:/*			printf("spdc_app1->modes[0]->sum_theta_c = %f\n",spdc_app1->modes[1]->sum_theta_c);*/
+214:/*	printf("spdc_app1->modes[0]->sum_theta_c = %f\n",spdc_app1->modes[2]->sum_theta_c);						*/
+468:printf("Here2 == %d\n",spdc_app1->num_lpdcs);
+757:	printf("Here2 == %d\n",spdc_app1->num_lpdcs);
+759:	for(index=0; index<spdc_app1->num_lpdcs; index++){
+760:		if(spdc_app1->cap_theta[index]->lpdc_id == pdcid)
+767:	for(i=0; i<spdc_app1->num_modes; i++){
+771:		spdc_app1->cap_theta[index]->mw[i]->theta_c_i = decode_ieee_single(temp5);
+773:		spdc_app1->modes[i]->sum_theta_c += (spdc_app1->cap_theta[index]->mw[i]->theta_c_i) * (spdc_app1->cap_theta[index]->mw[i]->power_value);
+775:/*		printf("Mode = %d, Index = %d, decodedTheta = %f, Theta_c_i = %f, power = %f\n",i,index, decode_ieee_single(temp5),(spdc_app1->cap_theta[index]->mw[i]->theta_c_i) ,(spdc_app1->cap_theta[index]->mw[i]->power_value));*/
+779:	spdc_app1->current_lpdcs ++;
+781:	if( spdc_app1->num_lpdcs == spdc_app1->current_lpdcs ){
+783:		for(i=0; i<spdc_app1->num_modes; i++){
+784:			spdc_app1->modes[i]->sum_theta_c /= spdc_app1->modes[i]->power_sum;
+785:/*			printf("Mode = %d, Theta_c = %f, powersum = %f\n",i,spdc_app1->modes[i]->sum_theta_c,spdc_app1->modes[i]->power_sum);*/
+789:		for(i=0; i<spdc_app1->num_lpdcs; i++){
+790:			for(j=0; j<spdc_app1->num_modes; j++){
+791:				float diff = fabs(spdc_app1->modes[j]->sum_theta_c - spdc_app1->cap_theta[i]->mw[j]->theta_c_i);
+793:				if( diff > spdc_app1->cap_theta[i]->mw[j]->threshold ){
+795:/*printf("Violation at LPDC [%d] Mode [%d] Diff [%f] Threshold [%f] theta_c [%f] Theta_c_i [%f] Soc [%ld] Fracsec [%ld]\n",spdc_app1->cap_theta[i]->lpdc_id,j,diff,spdc_app1->cap_theta[i]->mw[j]->threshold,spdc_app1->modes[j]->sum_theta_c , spdc_app1->cap_theta[i]->mw[j]->theta_c_i,soc,fracsec);*/
+800:/*printf("LPDC [%d] Mode [%d] Diff [%f] Threshold [%f] Soc [%ld] Fracsec [%ld]\n",spdc_app1->cap_theta[i]->lpdc_id,j,diff,spdc_app1->cap_theta[i]->mw[j]->threshold,soc,fracsec);*/
+801:/*				printf("LPDC [%d] Mode [%d] Diff [%f] Theta_c [%f] Theta_c_i [%f]\n",spdc_app1->cap_theta[i]->lpdc_id,j,diff,spdc_app1->modes[j]->sum_theta_c , spdc_app1->cap_theta[i]->mw[j]->theta_c_i);*/
+803:				spdc_app1->cap_theta[i]->mw[j]->theta_c_i = 0.0;
+807:		for(i=0; i<spdc_app1->num_modes; i++){
+808:			spdc_app1->modes[i]->sum_theta_c = 0.0;
+810:		spdc_app1->current_lpdcs = 0;	
